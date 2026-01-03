@@ -1,9 +1,6 @@
 package com.cb.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-@Service
 public class BookService {
 	
 	public void addBook() {
@@ -26,15 +23,17 @@ public class BookService {
 		
 	}
 	
-	public void sdd() {
+	public void viewBookById() {
 		
 	}
-
-	@Transactional
-	public void issueBook() {
+	
+	public void viewBooksByTitle() {
+		
+	}
+	
+	public void viewBookByAuthor() {
 
 	}
-
 //	 ==> Methods 
 	/*
 	 * Add a new book to library
