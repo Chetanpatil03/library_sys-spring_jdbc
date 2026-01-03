@@ -3,6 +3,7 @@ package com.cb.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cb.bean.User;
 import com.cb.dao.BookDAO;
 import com.cb.dao.TransactionDAO;
 import com.cb.dao.UserDAO;
@@ -10,18 +11,19 @@ import com.cb.dao.UserDAO;
 @Service
 public class UserService {
 	
-	@Autowired
-	private BookDAO bookdao;
 	
 	@Autowired
 	private UserDAO userDAO;
 	
-	@Autowired 
-	public TransactionDAO trxdao;
 	
-	public void newUser() {
-		
+	public void newUser(User user) {
+		if(user != null) {
+			userDAO.addUser(user);
+			return;
+		}
+		System.out.println("=> Can add null user ");
 	}
+	
 	public void updateUser() {
 		
 	}
