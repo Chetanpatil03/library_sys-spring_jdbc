@@ -12,10 +12,10 @@ public interface UserDAO {
 	public void deleteUser(int user_id);
 	public User getUser(int user_id);
 
-	public boolean isUserExist();
+	public boolean isUserExist(int user_id);
 
 	public List<User> getAllUsers();
-	public List<User> getUsersbyName(int user_id);
+	public List<User> getUsersbyName(String name);
 	
 	public List<User> getActiveUsers();
 	public List<User> getDeactiveUsers();
