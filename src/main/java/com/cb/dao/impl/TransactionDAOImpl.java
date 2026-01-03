@@ -2,11 +2,14 @@ package com.cb.dao.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.cb.bean.Book;
 import com.cb.bean.Transaction;
 import com.cb.bean.User;
 import com.cb.dao.TransactionDAO;
 
+@Repository
 public class TransactionDAOImpl implements TransactionDAO {
 
 	@Override

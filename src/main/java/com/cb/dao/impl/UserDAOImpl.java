@@ -2,11 +2,19 @@ package com.cb.dao.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
 import com.cb.bean.User;
 import com.cb.dao.UserDAO;
 
+@Repository
 public class UserDAOImpl implements UserDAO {
 
+	@Autowired
+	JdbcTemplate template;
+	
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub

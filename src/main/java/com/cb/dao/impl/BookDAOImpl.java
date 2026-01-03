@@ -1,15 +1,37 @@
 package com.cb.dao.impl;
 
+import java.sql.SQLException;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.UncategorizedSQLException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import com.cb.bean.Book;
 import com.cb.dao.BookDAO;
 
+@Repository
 public class BookDAOImpl implements BookDAO {
 
+	@Autowired
+	private JdbcTemplate template;
+	
 	@Override
 	public void addBook(Book book) {
-		// TODO Auto-generated method stub
+		String query = "insert into books(title, year, quantity,author) values (?,?,?,?)";
+		try {
+			int count = template.update(query, 
+					book.getTitle(), 
+					book.getYear(),
+					book.getYear(),
+					book.getAuthor());
+				System.out.println((count) > 0 ? "Inserted => Book" : "Failed =>");
+			
+		} catch (UncategorizedSQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Failed =>");
+		}
 		
 	}
 

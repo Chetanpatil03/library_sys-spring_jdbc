@@ -1,12 +1,21 @@
 package com.cb.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.lang.annotation.ElementType;
+import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cb.bean.Book;
 import com.cb.dao.BookDAO;
 import com.cb.dao.TransactionDAO;
 import com.cb.dao.UserDAO;
 
+@Service
 public class BookService {
+	
+//	@Autowired
+//	Scanner sc;
 	
 	@Autowired
 	private BookDAO bookdao;
@@ -17,8 +26,12 @@ public class BookService {
 	@Autowired 
 	public TransactionDAO trxdao;
 	
-	public void addBook() {
-		
+	public void addBook(Book book) {
+		if (!(book.getQty() < 0)) {
+			bookdao.addBook(book);
+			return;
+		}
+		throw new RuntimeException("Book quantity can not negative");
 	}
 	
 	public void updateBook() {

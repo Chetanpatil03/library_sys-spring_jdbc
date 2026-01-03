@@ -1,11 +1,13 @@
 package com.cb.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cb.dao.BookDAO;
 import com.cb.dao.TransactionDAO;
 import com.cb.dao.UserDAO;
 
+@Service
 public class UserService {
 	
 	@Autowired
