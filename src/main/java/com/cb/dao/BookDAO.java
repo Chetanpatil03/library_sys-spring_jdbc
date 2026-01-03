@@ -23,7 +23,7 @@ public interface BookDAO {
 	public List<Book> getBookByAuthor(String author);
 	public List<Book> getAvailableBooks();
 	
-	public void updateQuantity(int qty);
+	public void updateQuantity(int qty, int book_id);
 	public int currentQuantity(int book_id);
 	
 	public boolean isBookExist(int book_id);

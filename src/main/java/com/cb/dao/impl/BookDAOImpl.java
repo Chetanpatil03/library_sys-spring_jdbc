@@ -98,9 +98,14 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public void updateQuantity(int qty) {
-		// TODO Auto-generated method stub
-		
+	public void updateQuantity(int qty, int book_id) {
+		String query = "update books set quantity = ? where book_id = ?";
+		int count = template.update(query,qty,book_id);
+		if (count > 0) {
+			System.out.println("==> updated");
+		}else {
+			System.out.println("==> Failed");
+		}
 	}
 
 	@Override
@@ -111,8 +116,8 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public boolean isBookExist(int book_id) {
-		// TODO Auto-generated method stub
-		return false;
+		Book book = getBook(book_id);
+		return book == null; 
 	}
 
 }

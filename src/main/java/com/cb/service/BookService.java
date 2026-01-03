@@ -1,9 +1,7 @@
 package com.cb.service;
 
-import java.lang.annotation.ElementType;
-import java.util.Iterator;
+
 import java.util.List;
-import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,12 +17,7 @@ public class BookService {
 	@Autowired
 	private BookDAO bookdao;
 
-	@Autowired
-	private UserDAO userDAO;
-
-	@Autowired
-	public TransactionDAO trxdao;
-
+	
 	public void addBook(Book book) {
 		if (!(book.getQty() < 0)) {
 			bookdao.addBook(book);
@@ -123,6 +116,7 @@ public class BookService {
 			System.out.println("+---------+----------------------+--------+----------+-------------------+");
 		
 	}
+	
 //	 ==> Methods 
 	/*
 	 * Add a new book to library Update book details Remove a book from library View
