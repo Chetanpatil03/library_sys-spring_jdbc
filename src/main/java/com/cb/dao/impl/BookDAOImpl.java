@@ -1,6 +1,5 @@
 package com.cb.dao.impl;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.cb.bean.Book;
 import com.cb.dao.BookDAO;
+import com.cb.mapper.BookRowMapper;
 
 @Repository
 public class BookDAOImpl implements BookDAO {
@@ -24,7 +24,7 @@ public class BookDAOImpl implements BookDAO {
 			int count = template.update(query, 
 					book.getTitle(), 
 					book.getYear(),
-					book.getYear(),
+					book.getQty(),
 					book.getAuthor());
 				System.out.println((count) > 0 ? "Inserted => Book" : "Failed =>");
 			
@@ -37,44 +37,64 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public void updateBook(Book book) {
-		// TODO Auto-generated method stub
-		
+		String query = "update books set title = ?, year = ?, quantity = ?, author = ? where book_id = ?";
+		try {
+			int count = template.update(query, 
+					book.getTitle(), 
+					book.getYear(),
+					book.getQty(),
+					book.getAuthor(),
+					book.getId()
+					);
+				System.out.println((count) > 0 ? "Updated => Book" : "Failed =>");
+			
+		} catch (UncategorizedSQLException e) {
+			System.out.println(e.getMessage());
+			System.out.println("Failed =>");
+		}
 	}
 
 	@Override
-	public void deleteBook(int book_id) {
-		// TODO Auto-generated method stub
+	public void deleteBook(int book_id){
+		String query = "delete from books where book_id = ?";
+		int count = template.update(query,book_id);
+		System.out.println("Deletion => ");
+		if (count > 0) {
+			System.out.println("Success");
+		}else {
+			System.out.println("Failed");
+		}
 		
 	}
 
 	@Override
 	public Book getBook(int book_id) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from books where book_id = ?";
+		return template.queryForObject(query, new BookRowMapper(), book_id);
 	}
 
 	@Override
 	public List<Book> getAllBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from books";
+		return template.query(query, new BookRowMapper());
 	}
 
 	@Override
 	public List<Book> getBookByTitle(String title) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from books where title = ?";
+		return template.query(query, new BookRowMapper(), title);
 	}
 
 	@Override
 	public List<Book> getBookByAuthor(String author) {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from books where author = ?";
+		return template.query(query, new BookRowMapper(), author);
 	}
 
 	@Override
 	public List<Book> getAvailableBooks() {
-		// TODO Auto-generated method stub
-		return null;
+		String query = "select * from books where quantity > 0";
+		return template.query(query, new BookRowMapper());
 	}
 
 	@Override
@@ -84,13 +104,13 @@ public class BookDAOImpl implements BookDAO {
 	}
 
 	@Override
-	public void currentQuantity(int book_id) {
-		// TODO Auto-generated method stub
-		
+	public int currentQuantity(int book_id) {
+		String sql = "SELECT quantity FROM book WHERE book_id = ?";
+	    return template.queryForObject(sql, Integer.class, book_id);
 	}
 
 	@Override
-	public boolean isBooKExist(int book_id) {
+	public boolean isBookExist(int book_id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

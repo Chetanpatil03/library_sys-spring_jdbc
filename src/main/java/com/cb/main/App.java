@@ -35,8 +35,18 @@ public class App
         BookService service = context.getBean(BookService.class);
         
         System.out.println("Welcome ---> ");
-        System.out.println("Add new Book ---> ");
-        service.addBook(getInpBook(sc));
+//        System.out.println("Add new Book ---> ");
+//        service.addBook(getInpBook(sc));
+        
+//        service.viewBookById(1);
+//        Book book = getInpBook(sc);
+//        book.setId(1);
+//        service.updateBook(book);
+//        service.viewBookById(1);
+        
+//        service.viewAllBooks();
+        service.viewAvailableBooks();
+//        service.v
        
         
     }
