@@ -1,7 +1,21 @@
 package com.cb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cb.dao.BookDAO;
+import com.cb.dao.TransactionDAO;
+import com.cb.dao.UserDAO;
 
 public class BookService {
+	
+	@Autowired
+	private BookDAO bookdao;
+	
+	@Autowired
+	private UserDAO userDAO;
+	
+	@Autowired 
+	public TransactionDAO trxdao;
 	
 	public void addBook() {
 		

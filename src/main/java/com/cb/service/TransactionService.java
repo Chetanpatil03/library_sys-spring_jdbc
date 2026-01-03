@@ -1,10 +1,25 @@
 package com.cb.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cb.dao.BookDAO;
+import com.cb.dao.TransactionDAO;
+import com.cb.dao.UserDAO;
+
 @Service
 public class TransactionService {
+	
+	@Autowired
+	private BookDAO bookdao;
+	
+	@Autowired
+	private UserDAO userDAO;
+	
+	@Autowired 
+	public TransactionDAO trxdao;
+	
 	@Transactional
 	public void issueBook() {
 		
