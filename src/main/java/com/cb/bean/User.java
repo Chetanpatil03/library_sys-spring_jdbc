@@ -10,7 +10,6 @@ public class User {
 	public User() {}
 
 	public User(String name, String email, int phone, String status) {
-		super();
 		this.name = name;
 		this.email = email;
 		this.phone = phone;

@@ -1,7 +1,5 @@
 package com.cb.bean;
 
-import java.time.LocalDateTime;
-
 public class Transaction {
 	private int transaction_id;
 	private int user_id;
@@ -11,8 +9,7 @@ public class Transaction {
 	
 	public Transaction() {}
 
-	public Transaction(int transaction_id, int user_id, int book_id, String issueDate, String returnDate) {
-		this.transaction_id = transaction_id;
+	public Transaction(int user_id, int book_id, String issueDate, String returnDate) {
 		this.user_id = user_id;
 		this.book_id = book_id;
 		this.issueDate = issueDate;
