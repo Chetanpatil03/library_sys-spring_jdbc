@@ -10,6 +10,7 @@ import com.cb.bean.Book;
 import com.cb.bean.User;
 import com.cb.resources.ConfigFile;
 import com.cb.service.BookService;
+import com.cb.service.TransactionService;
 import com.cb.service.UserService;
 
 public class App 
@@ -50,6 +51,7 @@ public class App
         Scanner sc = new Scanner(System.in);
         BookService bookService = context.getBean(BookService.class);
         UserService userService = context.getBean(UserService.class);
+        TransactionService trxService = context.getBean(TransactionService.class);
         
         System.out.println("Welcome ---> ");
 //        System.out.println("Add new Book ---> ");
@@ -65,7 +67,9 @@ public class App
 //        bookService.viewAvailableBooks();
 //        bookService.v
         
-        userService.addUser(getInpUser(sc));
+//        userService.addUser(getInpUser(sc));
+        
+        trxService.issueBook(1, 1);
         
         
         

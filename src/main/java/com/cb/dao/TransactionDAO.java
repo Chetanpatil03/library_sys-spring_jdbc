@@ -9,23 +9,22 @@ import com.cb.bean.User;
 
 public interface TransactionDAO {
 //	--> CRUD ops on Transaction
-	public void addTransaction(Transaction transaction);
-	public void updateTransaction(Transaction transaction);
-	public void deleteTransaction(int transaction_id);
-	public Transaction getTransaction(int transaction_id);
+	public void issueBookTransaction(int user_id, int book_id);
+	public void returnBookTransaction(int trx_id);
+	public Transaction getTransaction(int trx_id);
 	
 	public List<Transaction> getAllTransactions();
-	public List<Transaction> getAllActiveTransactions();
+	public List<Transaction> getActiveTransactions();
 
-	public Transaction getTransactionByUserID(int user_id);
-	public Transaction getTransactionByBookID(int book_id);
+	public List<Transaction> getTransactionByUserID(int user_id);
+	public List<Transaction> getTransactionByBookID(int book_id);
 	
 //	-- active transactions by book and user ==> 
 	public List<Transaction> getActiveTransactionsByUser(User user);
 	public List<Transaction> getActiveTransactionsByBook(Book book);
 	
 //	is exist and is active==>
-	public boolean isTransactionExist(Transaction transaction);
+	public boolean isTransactionExist(int trx_id);
 	public boolean isTransactionActive(Transaction transaction);
 	
 	/*
