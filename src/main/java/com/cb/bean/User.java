@@ -4,12 +4,12 @@ public class User {
 	private int user_id;
 	private String name;
 	private String email;
-	private int phone;
+	private String phone;
 	private String status;
 	
 	public User() {}
 
-	public User(String name, String email, int phone, String status) {	
+	public User(String name, String email, String phone, String status) {	
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
@@ -36,10 +36,10 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getStatus() {

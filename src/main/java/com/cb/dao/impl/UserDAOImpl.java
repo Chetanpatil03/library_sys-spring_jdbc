@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.cb.bean.Book;
 import com.cb.bean.User;
 import com.cb.dao.UserDAO;
 import com.cb.mapper.UserRowMapper;
@@ -87,7 +88,7 @@ public class UserDAOImpl implements UserDAO {
 	}
 
 	@Override
-	public List<User> getUsersbyName(String name) {
+	public List<User> getUsersByName(String name) {
 		String query = "select * from users where name = ?";
 		return template.query(query, new UserRowMapper(),name);
 	}
@@ -103,5 +104,15 @@ public class UserDAOImpl implements UserDAO {
 		String query = "select * from users where status = null or status = 'deactive'";
 		return template.query(query, new UserRowMapper());
 	}
-
+	
+	@Override
+	public List<String> getCurrentBorrowedBooks(int user_id) {
+		String query = "select books.title from books "
+				+ "join transactions on transactions.book_id = books.book_id "
+				+ "join users on users.user_id = transactions.user_id "
+				+ "where transactions.user_id = ?";
+		
+		return template.queryForList(query, String.class, user_id);
+		
+	}
 }

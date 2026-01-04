@@ -15,7 +15,9 @@ public interface UserDAO {
 	public boolean isUserExist(int user_id);
 
 	public List<User> getAllUsers();
-	public List<User> getUsersbyName(String name);
+	public List<User> getUsersByName(String name);
+	
+	public List<String> getCurrentBorrowedBooks(int user_id);
 	
 	public List<User> getActiveUsers();
 	public List<User> getDeactiveUsers();
