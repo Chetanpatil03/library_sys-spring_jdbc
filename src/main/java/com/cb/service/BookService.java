@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.cb.bean.Book;
 import com.cb.dao.BookDAO;
-import com.cb.dao.TransactionDAO;
-import com.cb.dao.UserDAO;
 
 @Service
 public class BookService {
@@ -34,8 +32,8 @@ public class BookService {
 		throw new RuntimeException("Book quantity can not negative");
 	}
 
-	public void removeBook() {
-
+	public void removeBook(int book_id) {
+		bookdao.deleteBook(book_id);
 	}
 
 	public void viewAllBooks() {

@@ -7,8 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.cb.bean.Book;
+import com.cb.bean.User;
 import com.cb.resources.ConfigFile;
 import com.cb.service.BookService;
+import com.cb.service.UserService;
 
 public class App 
 {
@@ -27,26 +29,44 @@ public class App
 		return book;		
 	}
 	
+	public static User getInpUser(Scanner sc) {
+		User user = new User();
+		
+		System.out.print("Enter Name :: ");
+		user.setName(sc.nextLine());
+		System.out.print("Enter Email :: ");
+		user.setEmail(sc.nextLine());
+		System.out.print("Enter Phone :: ");
+		user.setPhone(sc.nextLine());
+		
+		user.setStatus("ACTIVE");
+		return user;
+	}
+	
     public static void main( String[] args )
     {
     	ApplicationContext context = new AnnotationConfigApplicationContext(ConfigFile.class);
     	
         Scanner sc = new Scanner(System.in);
-        BookService service = context.getBean(BookService.class);
+        BookService bookService = context.getBean(BookService.class);
+        UserService userService = context.getBean(UserService.class);
         
         System.out.println("Welcome ---> ");
 //        System.out.println("Add new Book ---> ");
-//        service.addBook(getInpBook(sc));
+//        bookService.addBook(getInpBook(sc));
         
-//        service.viewBookById(1);
+//        bookService.viewBookById(1);
 //        Book book = getInpBook(sc);
 //        book.setId(1);
-//        service.updateBook(book);
-//        service.viewBookById(1);
+//        bookService.updateBook(book);
+//        bookService.viewBookById(1);
         
-//        service.viewAllBooks();
-        service.viewAvailableBooks();
-//        service.v
+//        bookService.viewAllBooks();
+//        bookService.viewAvailableBooks();
+//        bookService.v
+        
+        userService.addUser(getInpUser(sc));
+        
         
         
        
