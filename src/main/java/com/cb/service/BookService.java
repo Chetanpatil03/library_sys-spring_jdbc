@@ -17,11 +17,10 @@ public class BookService {
 
 	
 	public void addBook(Book book) {
-		if (!(book.getQty() < 0)) {
-			bookdao.addBook(book);
-			return;
+		if (book.getQty() < 0) {
+		    throw new IllegalArgumentException("Book quantity cannot be negative");
 		}
-		throw new RuntimeException("Book quantity can not negative");
+		bookdao.addBook(book);
 	}
 
 	public void updateBook(Book book) {
@@ -113,6 +112,17 @@ public class BookService {
 			
 			System.out.println("+---------+----------------------+--------+----------+-------------------+");
 		
+	}
+	
+	public void increaseQuantity(int bookId, int amount) {
+	    Book book = bookdao.getBook(bookId);
+	    if (book == null) throw new IllegalArgumentException("Book not found");
+	    bookdao.updateQuantity(book.getQty() + amount, bookId);
+	}
+
+	public boolean isAvailable(int bookId) {
+	    Book book = bookdao.getBook(bookId);
+	    return book != null && book.getQty() > 0;
 	}
 	
 //	 ==> Methods 
