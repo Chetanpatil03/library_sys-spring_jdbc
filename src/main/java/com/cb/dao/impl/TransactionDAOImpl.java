@@ -74,11 +74,11 @@ public class TransactionDAOImpl implements TransactionDAO {
 	}
 
 	@Override
-	public boolean isTransactionActive(Transaction transaction) {
+	public boolean isTransactionActive(int trx_id) {
 		try {
 	        String sql = "SELECT * FROM transactions WHERE return_date IS NULL AND transaction_id = ?";
 	        template.queryForObject(sql, new TransactionRowMapper(),
-	                transaction.getTransaction_id());
+	                trx_id);
 	        return true;
 	    } catch (EmptyResultDataAccessException e) {
 	        return false;
@@ -95,6 +95,26 @@ public class TransactionDAOImpl implements TransactionDAO {
 	public void returnBookTransaction(int trx_id) {
 		String sql = "UPDATE transactions SET return_date = ? WHERE transaction_id = ?";
 		template.update(sql, Date.valueOf(LocalDate.now()), trx_id);
+	}
+	
+	public boolean isAlreadyBorrowed(int book_id, int user_id) {
+		String query = "select * from transactions where user_id = ? and book_id = ? and return_date IS NULL";
+		try {
+			template.queryForObject(query, new TransactionRowMapper(),
+	                user_id,book_id);
+	        return true; // --> if true not let them issue the book 
+	    } catch (EmptyResultDataAccessException e) {
+	        return false;
+	    }
+	}
+	
+	public Integer getBookIdByTransaction(int trx_id){
+		String query = "select book_id from transactions where transaction_id = ?";
+		try {
+			return template.queryForObject(query, Integer.class, trx_id);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 }

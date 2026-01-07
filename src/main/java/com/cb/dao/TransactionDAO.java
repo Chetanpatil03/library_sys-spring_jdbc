@@ -25,7 +25,12 @@ public interface TransactionDAO {
 	
 //	is exist and is active==>
 	public boolean isTransactionExist(int trx_id);
-	public boolean isTransactionActive(Transaction transaction);
+	public boolean isTransactionActive(int trx_id);
+	
+//	is already borrowed ==>
+	public boolean isAlreadyBorrowed(int book_id, int user_id);
+	
+	public Integer getBookIdByTransaction(int trx_id);
 	
 	/*
 	 * - Save new transaction (issue book)
