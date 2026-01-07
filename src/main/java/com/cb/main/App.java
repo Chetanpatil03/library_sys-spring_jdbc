@@ -68,7 +68,7 @@ public class App
 //        bookService.v
         
 //        userService.addUser(getInpUser(sc));
-        
+        System.out.println("Transaction begin");
         trxService.issueBook(1, 1);
         
         
