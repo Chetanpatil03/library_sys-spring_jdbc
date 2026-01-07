@@ -20,7 +20,7 @@ public class UserRowMapper implements RowMapper<User>
 		user.setPhone(rs.getString("phone"));
 		user.setStatus(rs.getString("status"));
 		
-		return null;
+		return user;
 	}
 	
 }
