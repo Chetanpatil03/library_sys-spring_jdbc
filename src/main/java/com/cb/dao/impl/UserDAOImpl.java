@@ -3,6 +3,7 @@ package com.cb.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -72,8 +73,13 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public User getUser(int user_id) {
-		String query = "select * from users where user_id = ?";
-		return template.queryForObject(query, new UserRowMapper(),user_id);
+	    String query = "select * from users where user_id = ?";
+	    try {
+	        return template.queryForObject(query, new UserRowMapper(), user_id);
+	    } catch (EmptyResultDataAccessException e) {
+	        System.out.println("User not found: " + user_id);
+	        return null;
+	    }
 	}
 
 	@Override

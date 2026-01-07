@@ -3,6 +3,7 @@ package com.cb.dao.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.UncategorizedSQLException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -69,9 +70,17 @@ public class BookDAOImpl implements BookDAO {
 
 	@Override
 	public Book getBook(int book_id) {
-		String query = "select * from books where book_id = ?";
-		return template.queryForObject(query, new BookRowMapper(), book_id);
+//		System.out.println("JdbcTemplate = " + template);
+	    String query = "select * from books where book_id = ?";
+	    try {
+	        return template.queryForObject(query, new BookRowMapper(), book_id);
+	    } catch (EmptyResultDataAccessException e) {
+	    	e.printStackTrace();
+	        System.out.println("Book not found: " + book_id);
+	        return null;
+	    }
 	}
+
 
 	@Override
 	public List<Book> getAllBooks() {
@@ -111,7 +120,12 @@ public class BookDAOImpl implements BookDAO {
 	@Override
 	public int currentQuantity(int book_id) {
 		String sql = "SELECT quantity FROM book WHERE book_id = ?";
-	    return template.queryForObject(sql, Integer.class, book_id);
+		try {
+			return template.queryForObject(sql, Integer.class, book_id);			
+		} catch (EmptyResultDataAccessException e) {
+			e.getMessage();
+			return 0;
+		}
 	}
 
 	@Override
